@@ -1,15 +1,8 @@
 <template>
   <div class="dv-input-area">
-    <!-- <div class="dv-input-left" v-if="label !== ''">
-      <slot name="label">
-        <div class="dv-input-label" v-html="label"></div>
-      </slot>
-    </div> -->
-    <i class="dv-input-clear" v-if="clearable && currentValue" @click="handlerClear">X</i>
+    <i class="dv-input-clear iconfont icon-qingchu" v-if="clearable && currentValue" @click="handlerClear"></i>
     <div class="dv-input-center">
       <input :placeholder="placeholder" :disabled="disabled" :readonly="readonly" v-model="currentValue" @blur="handlerBlur" class="dv-input"/>
-    </div>
-    <div class="dv-input-right">
     </div>
   </div>
 </template>
@@ -93,31 +86,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-.dv-input-area{
-  display:flex;
-  background-color: #fff;
-  font-size: 20px;
-  padding: 5px 0;
-  align-items: center;
-  position: relative;
-  border-bottom: 1px solid #f0f0f0;
-  .dv-input-left{
-    display: inline-block;
-    padding-right: 20px;
-  }
-  .dv-input-center{
-    flex: 1;
-    height: 30px;
-    .dv-input{
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .dv-input-clear{
-    position: absolute;
-    right: 0;
-  }
-}
-</style>

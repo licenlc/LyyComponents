@@ -24,10 +24,5 @@ export default new Router({
       name: 'picker',
       component: Picker
     }
-    // {
-    //   path: '/date',
-    //   name: 'date',
-    //   component: DatePicker
-    // }
   ]
 })

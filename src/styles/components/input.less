@@ -1,10 +1,24 @@
 .dv-input-area{
-    display: flex;
-    justify-items: center;
-    .dv-input-left{
-      display: inline-block;
+  display:flex;
+  background-color: #fff;
+  font-size: 20px;
+  padding: 5px 0;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid #f0f0f0;
+  .dv-input-left{
+    display: inline-block;
+    padding-right: 20px;
+  }
+  .dv-input-center{
+    flex: 1;
+    height: 30px;
+    .dv-input{
+      height: 100%;
     }
-    .dv-input-center{
-      flex: 1;
-    }
+  }
+  .dv-input-clear{
+    position: absolute;
+    right: 0;
+  }
 }
