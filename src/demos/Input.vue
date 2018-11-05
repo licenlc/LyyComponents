@@ -1,7 +1,7 @@
 <template>
   <div class="input-pages">
     <lyy-input label="姓名" v-model="value1" placeholder="请输入姓名"/>
-    <lyy-input label="电话号码" v-model="phone" mask="999 9999 9999" placeholder="请输入姓名"/>
+    <lyy-input label="电话号码" v-model="phone" mask="999 9999 9999" placeholder="请输入电话号码"/>
   </div>
 </template>
 
