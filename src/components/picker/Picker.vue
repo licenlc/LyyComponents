@@ -192,7 +192,3 @@ export default {
   }
 }
 </script>
-<style lang="less">
-@import '@/styles/common/transition';
-@import '@/styles/components/picker';
-</style>
