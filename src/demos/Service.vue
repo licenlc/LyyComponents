@@ -1,13 +1,14 @@
 <template>
     <div class="">
         <button @click="show=true">展示客服</button>
+        <button @click="showToast">展示Toast</button>
         <service v-model="show" :guide="true"/>
     </div>
 </template>
 
 <script>
 import Service from '@/buscomponents/service/Service'
-// import TransferDom from '@/directives/v-transfer-dom'
+import Toast from '@/components/toast'
 export default {
   components: {
     Service
@@ -15,6 +16,12 @@ export default {
   data () {
     return {
       show: false
+    }
+  },
+  methods: {
+    showToast () {
+      Toast({msg: 'ldldldldll'})
+      console.log(this.$toast('jdjjjddj'))
     }
   }
 }

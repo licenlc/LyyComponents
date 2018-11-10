@@ -1,6 +1,6 @@
 <template>
-  <transition name="picker-fade">
-    <div class="picker" v-show="show" @click="show=false" @touchmove.prevent>
+  <transition name="dv-mask">
+    <div class="picker"  v-transfer-dom v-show="show" @click="show=false" @touchmove.prevent>
       <transition name="picker-content-fade">
         <div class="picker-wrapper" v-show="show" @click.stop>
           <!-- 头部区 -->
@@ -28,11 +28,15 @@
 
 <script>
 import BScroll from 'better-scroll'
+import TransferDom from '@/directives/v-transfer-dom'
 
 const [ON_OK, ON_CANCEL, ON_CHANGE, VALUE_CHANGE] = ['on-ok', 'on-cancel', 'on-change', 'value-change']
 
 export default {
   name: 'picker',
+  directives: {
+    TransferDom
+  },
   props: {
     data: {
       type: Array,

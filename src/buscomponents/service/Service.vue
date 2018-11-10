@@ -1,5 +1,5 @@
 <template>
-  <transition name="picker-fade">
+  <transition name="dv-mask">
     <div class="lyy-customer"  v-transfer-dom v-show="curValue" @click="curValue=false" @touchmove.prevent>
       <transition name="picker-content-fade">
         <section class="customer-wrapper" v-show="curValue" @click.stop>
@@ -57,6 +57,9 @@ import TransferDom from '@/directives/v-transfer-dom'
 
 export default {
   name: 'lyy-customer',
+  directives: {
+    TransferDom
+  },
   props: {
     guide: {
       type: Boolean,
@@ -71,9 +74,6 @@ export default {
       default: ''
     },
     value: Boolean
-  },
-  directives: {
-    TransferDom
   },
   data () {
     return {
@@ -109,7 +109,7 @@ export default {
         setTimeout(() => {
           this.curValue = val
           this.QRFlag = false
-        }, 3000)
+        }, 500)
       }
     }
   }

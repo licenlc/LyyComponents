@@ -5,6 +5,7 @@ import Input from '@/demos/Input'
 import Picker from '@/demos/Picker'
 import upload from '@/demos/upload'
 import service from '@/demos/Service'
+import dialog from '@/demos/Dialog'
 // import DatePicker from '@/demos/DatePicker'
 
 Vue.use(Router)
@@ -35,6 +36,11 @@ export default new Router({
       path: '/service',
       name: 'service',
       component: service
+    },
+    {
+      path: '/dialog',
+      name: 'dialog',
+      component: dialog
     }
   ]
 })

@@ -1,5 +1,4 @@
 // Thanks to: https://github.com/calebroseland/vue-dom-portal
-
 // const objectAssign = require('object-assign')
 const objectAssign = Object.assign
 /**

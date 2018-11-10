@@ -1,6 +1,6 @@
 <template>
-   <transition name="picker-fade">
-    <div class="lyy-charge" v-show="curValue" @click="curValue=false" @touchmove.prevent>
+   <transition name="dv-mask">
+    <div class="lyy-charge" v-transfer-dom v-show="curValue" @click="curValue=false" @touchmove.prevent>
       <transition name="picker-content-fade">
         <section class="charge-wrapper" v-show="curValue" @click.stop>
           <div class="charge-title">
