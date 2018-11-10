@@ -4,6 +4,7 @@ import HelloWorld from '@/demos/HelloWorld'
 import Input from '@/demos/Input'
 import Picker from '@/demos/Picker'
 import upload from '@/demos/upload'
+import service from '@/demos/Service'
 // import DatePicker from '@/demos/DatePicker'
 
 Vue.use(Router)
@@ -29,6 +30,11 @@ export default new Router({
       path: '/upload',
       name: 'upload',
       component: upload
+    },
+    {
+      path: '/service',
+      name: 'service',
+      component: service
     }
   ]
 })

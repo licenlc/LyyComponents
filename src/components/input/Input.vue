@@ -2,7 +2,13 @@
   <div class="dv-input-area">
     <i class="dv-input-clear iconfont icon-qingchu" v-if="clearable && currentValue" @click="handlerClear"></i>
     <div class="dv-input-center">
-      <input :placeholder="placeholder" :disabled="disabled" :readonly="readonly" v-model="currentValue" @blur="handlerBlur" class="dv-input"/>
+      <input
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :readonly="readonly"
+      v-model="currentValue"
+      @blur="handlerBlur"
+      class="dv-input"/>
     </div>
   </div>
 </template>

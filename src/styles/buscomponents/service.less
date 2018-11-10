@@ -1,0 +1,53 @@
+.lyy-customer{
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 100;
+  position: fixed;
+  background-color: rgba(0, 0, 0, .3);
+  .customer-wrapper{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 101;
+    background-color: #fff;
+    text-align: center;
+    .customer-title{
+      font-weight: 600;
+      padding: 14px;
+      border:1px solid #f0f0f0;
+    }        
+  }
+}
+.acq-wrapper{
+  border-bottom: 10px solid #f0f0f0;
+}
+
+.problem-wrapper{
+  h2{
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .flex{
+    display: flex;
+    justify-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    .pro-item{
+      padding-top: 10px;
+      flex: 1;
+      .icon{
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+        background-color: red;
+      }
+      p{
+        padding: 10px 0;
+      }
+    }
+  }  
+}
