@@ -8,7 +8,6 @@
 
 <script>
 import Service from '@/buscomponents/service/Service'
-import Toast from '@/components/toast'
 export default {
   components: {
     Service
@@ -20,8 +19,9 @@ export default {
   },
   methods: {
     showToast () {
-      Toast({msg: 'ldldldldll'})
-      console.log(this.$toast('jdjjjddj'))
+      // Toast({msg: 'ldldldldll'})
+      this.$toast('jdjjjddj'+ Date.now())
+      // console.log(this.$toast('jdjjjddj'))
     }
   }
 }
