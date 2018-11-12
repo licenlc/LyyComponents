@@ -17,7 +17,6 @@ const getInstance = () => {
 
 ToastConstructor.prototype.close = function () {
   this.visible = false
-  console.log('close:', this)
   toastPools.push(this)
 }
 
@@ -43,9 +42,7 @@ let Toast = (opts = {}) => {
   Vue.nextTick(() => {
     instance.visible = true
     duration && (instance.timer = setTimeout(() => {
-      console.log(instance)
       instance.close()
-      instance.visible = false
     }, duration))
   })
   return instance

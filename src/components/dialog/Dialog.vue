@@ -11,8 +11,8 @@
                 </slot>
                 <slot name="footer">
                   <div class="dialog-btns">
-                    <a href="javascript:;" class="dialog-btn dialog-cancel" v-if="showCancel" v-html="cancelText" @click="visible=false"/>
-                    <a href="javascript:;" class="dialog-btn dialog-ok" v-html="okText"></a>
+                    <a href="javascript:;" class="dialog-btn dialog-cancel" v-if="showCancel" @click="handlerAction('cancel')">{{cancelText}}</a>
+                    <a href="javascript:;" class="dialog-btn dialog-ok" @click="handlerAction('ok')">{{okText}}</a>
                   </div>
                 </slot>
             </div>
@@ -41,13 +41,28 @@ export default {
       type: String,
       default: '取消'
     },
+    onOk: {
+      type: Function,
+      default: () => {}
+    },
+    onCancel: {
+      type: Function,
+      default: () => {}
+    }
   },
   data () {
     return {
-      visible: true
+      visible: false
     }
   },
   methods: {
+    handlerAction (type) {
+      this.visible = false
+      if (type === 'ok') {
+        this.onOk()
+        this.$emit('on-OK')
+      }
+    },
     show () {
       this.visible = true
     }

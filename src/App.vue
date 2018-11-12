@@ -11,10 +11,7 @@ export default {
 </script>
 
 <style lang="less">
-@import './styles/common/index.less';
-@import './styles/animation/index.less';
-@import './styles/components/index.less';
-@import './styles/buscomponents/index.less';
+@import './styles/index.less';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

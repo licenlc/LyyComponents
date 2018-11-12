@@ -20,7 +20,7 @@ export default {
   methods: {
     showToast () {
       // Toast({msg: 'ldldldldll'})
-      this.$toast('jdjjjddj'+ Date.now())
+      this.$toast(`jdjjjddj${Date.now()}kdkkdkdkdkdkdkdkdkdk`)
       // console.log(this.$toast('jdjjjddj'))
     }
   }

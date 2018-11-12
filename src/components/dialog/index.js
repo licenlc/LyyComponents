@@ -4,10 +4,13 @@ let DialogConstructor = Vue.extend(Dialog)
 
 const DEFAULT = {
   okText: '确认',
-  cancelText: '取消'
+  cancelText: '取消',
+  msg: '',
+  type: ''
 }
 
 let dialogPools = []
+let instance = null
 
 let getInstance = () => {
   if (dialogPools.length > 0) {
@@ -25,17 +28,28 @@ let $Dialog = (opts) => {
   instance.cancelText = opts.cancelText
 }
 
-let alert = (content) => {
-  DEFAULT.conent = content
-  DEFAULT.okText = ''
-  $Dialog(DEFAULT)
+let alert = (opts) => {
+  let tempOpts = {}
+  if (typeof opts === 'string') {
+    tempOpts.message = opts
+    tempOpts.title = '温馨提示'
+    tempOpts.okText = '我知道了'
+  }
+  tempOpts.type = 'alert'
+  tempOpts.cancelText = ''
+  $Dialog(tempOpts)
 }
 
-let dialog = (opts) => {
+let confirm = (opts) => {
+  let tempOpts = {}
+  if (typeof opts === 'string') {
+    tempOpts.msg = opts
+  }
+  opts.type = 'confirm'
   $Dialog(opts)
 }
 
 export {
   alert,
-  dialog
+  confirm
 }

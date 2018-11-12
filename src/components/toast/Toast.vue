@@ -1,7 +1,7 @@
 <template>
   <div class="dv-toast" :class="customClass" v-show="visible">
       <i class="dv-toast-icon" v-if="icon"></i>
-      <p>{{msg}}</p>
+      <span>{{msg}}</span>
   </div>
 </template>
 
