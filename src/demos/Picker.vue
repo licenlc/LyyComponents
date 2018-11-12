@@ -3,7 +3,8 @@
       <div @click="showPicker" style="padding: 10px;width:80px;display:inline-block;text-align:center;">点击</div>
       <div @click="showPicker2" style="padding: 10px;width:80px;display:inline-block;text-align:center;">点击</div>
       <span style="color: red; font-size: 18px; text-align: center;">{{dateValue}}</span>
-      <picker :data="data" ref="picker" :defaultIndex="[3]"/>
+      <picker title="标题111" :data="data" ref="picker" :defaultIndex="[3]"/>
+      <picker title="标题222" :data="data" ref="picker" :defaultIndex="[3]"/>
 
     </div>
 </template>

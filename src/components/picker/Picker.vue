@@ -166,7 +166,6 @@ export default {
     },
     createWheel (wheelWrapper, i) {
       console.log('createWheel- 151:', this.defaultIndex[i])
-      // parseInt(this.defaultIndex[i])
       if (!this.wheels[i]) {
         this.wheels[i] = new BScroll(wheelWrapper.children[i], {
           wheel: {
@@ -181,7 +180,7 @@ export default {
           swipeTime: 1000
         })
         this.wheels[i].on('scrollEnd', () => {
-          console.log('滑动对应的列数:', i, '滑动选中的index:', this.wheels[i].getSelectedIndex(), '滑动选中的value:', this.pickerData[i][this.wheels[i].getSelectedIndex()].text)
+          // console.log('滑动对应的列数:', i, '滑动选中的index:', this.wheels[i].getSelectedIndex(), '滑动选中的value:', this.pickerData[i][this.wheels[i].getSelectedIndex()].text)
           this.$emit(ON_CHANGE, i, this.wheels[i].getSelectedIndex())
         })
       } else {
