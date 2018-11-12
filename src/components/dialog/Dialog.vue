@@ -7,7 +7,9 @@
                   <p class="title" v-html="title" v-if="title"></p>
                 </slot>
                 <slot name="content">
-                  <p class="content" :class="contentClass" v-html="content" v-if="content"></p>
+                  <p class="content" :class="contentClass">
+                    {{content}}
+                  </p>
                 </slot>
                 <slot name="footer">
                   <div class="dialog-btns">
@@ -41,7 +43,7 @@ export default {
       type: String,
       default: '取消'
     },
-    onOk: {
+    onOK: {
       type: Function,
       default: () => {}
     },
@@ -59,7 +61,7 @@ export default {
     handlerAction (type) {
       this.visible = false
       if (type === 'ok') {
-        this.onOk()
+        this.onOK && this.onOk()
         this.$emit('on-OK')
       }
     },

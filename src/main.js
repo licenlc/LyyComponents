@@ -4,9 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Toast from '@/components/toast/index'
+import {alert, confirm} from '@/components/dialog'
 
 Vue.config.productionTip = false
 Vue.prototype.$toast = Toast
+Vue.prototype.$alert = alert
+Vue.prototype.$dialog = confirm
 
 /* eslint-disable no-new */
 new Vue({

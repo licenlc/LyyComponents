@@ -21,7 +21,6 @@ ToastConstructor.prototype.close = function () {
 }
 
 let Toast = (opts = {}) => {
-  console.log(opts)
   if (typeof opts === 'string') {
     let msg = opts
     opts = {}
@@ -29,7 +28,6 @@ let Toast = (opts = {}) => {
   }
   const duration = opts.duration || 4000
   let instance = getInstance()
-  console.log(instance)
   clearTimeout(instance.timer)
   instance.duration = duration
   instance.msg = opts.msg

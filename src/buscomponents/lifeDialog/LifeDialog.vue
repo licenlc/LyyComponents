@@ -45,3 +45,20 @@ export default {
 }
 </script>
 
+<style lang="less" scoped>
+.life-dialog-footer{
+  display: flex;
+  justify-content: space-between;
+  .life-btn{
+    padding: 10px;
+    border: 1px solid #E9E9E9;
+    border-radius: 10px;
+  }
+  .life-btn-cancel{
+    color: #999;
+  }
+  .life-btn-ok{
+    color: #fff;
+  }
+}
+</style>

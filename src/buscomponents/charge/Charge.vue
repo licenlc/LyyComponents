@@ -8,7 +8,7 @@
           </div>
           <slot name="chargeList">
             <ul class="charge-wrapper">
-              <li class="charge-item" v-for="(item, index) in chargeList" :key="index">
+              <li class="charge-item" v-for="(item, index) in chargeList" :key="index" @click="handlerItem(item)">
               </li>
             </ul>
           </slot>
@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     handlerItem (obj) {
-      this.$emit('charge-item', obj)
+      this.$emit('on-select', obj)
     }
   }
 }

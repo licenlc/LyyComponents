@@ -3,49 +3,70 @@ import Dialog from './Dialog'
 let DialogConstructor = Vue.extend(Dialog)
 
 const DEFAULT = {
+  type: '',
+  title: '',
+  titleClass: '',
+  content: '',
+  contentClass: '',
   okText: '确认',
+  showCancel: true,
   cancelText: '取消',
-  msg: '',
-  type: ''
+  onOK: null,
+  onCancel: null
 }
 
-let dialogPools = []
-let instance = null
+let instanceT = null
 
 let getInstance = () => {
-  if (dialogPools.length > 0) {
-    return dialogPools.shift()
+  if (instanceT) {
+    return
   }
-  return new DialogConstructor({
+  instanceT = new DialogConstructor({
     el: document.createElement('div')
   })
 }
 
 let $Dialog = (opts) => {
+  console.log('opts:', opts)
   opts = Object.assign(DEFAULT, opts)
-  let instance = getInstance()
-  instance.okText = opts.okText
-  instance.cancelText = opts.cancelText
+  console.log(opts)
+  getInstance()
+  let instance = instanceT
+  for (const key in opts) {
+    console.log(`${key}=${opts[key]}`)
+    instance[key] = opts[key]
+  }
+  console.log(instance)
+  document.body.appendChild(instance.$el)
+  Vue.nextTick(() => {
+    instance.visible = true
+  })
 }
 
 let alert = (opts) => {
-  let tempOpts = {}
+  let tempOpts = JSON.parse(JSON.stringify(DEFAULT))
   if (typeof opts === 'string') {
-    tempOpts.message = opts
+    tempOpts.content = opts
     tempOpts.title = '温馨提示'
     tempOpts.okText = '我知道了'
   }
   tempOpts.type = 'alert'
   tempOpts.cancelText = ''
+  tempOpts.showCancel = false
+  tempOpts.onOK = opts.onOK || null
   $Dialog(tempOpts)
 }
 
 let confirm = (opts) => {
-  let tempOpts = {}
   if (typeof opts === 'string') {
-    tempOpts.msg = opts
+    let content = opts
+    opts = {}
+    opts.title = '确认框'
+    opts.content = content
   }
   opts.type = 'confirm'
+  opts.cancelText = opts.cancelText || '取消'
+  opts.showCancel = true
   $Dialog(opts)
 }
 

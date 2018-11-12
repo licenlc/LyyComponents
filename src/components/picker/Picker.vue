@@ -6,6 +6,7 @@
           <!-- 头部区 -->
           <div class="picker-header">
               <div class="picker-btn picker-cancel" @click="hidePicker">{{cancelText}}</div>
+              {{title}}
               <div class="picker-btn picker-ok" @click="onOk">{{okText}}</div>
           </div>
           <!-- 内容区 -->
@@ -57,7 +58,8 @@ export default {
     value: {
       type: Boolean,
       default: false
-    }
+    },
+    title: String
   },
   data () {
     return {
