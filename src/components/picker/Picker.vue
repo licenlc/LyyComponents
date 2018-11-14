@@ -73,13 +73,13 @@ export default {
   },
   watch: {
     data (value, oldValue) {
-      console.log(JSON.stringify(value), JSON.stringify(oldValue))
+      // console.log(JSON.stringify(value), JSON.stringify(oldValue))
       this.setData(value)
     }
   },
   created () {
-    console.log(JSON.stringify(this.data))
-    console.log('picker-created', JSON.stringify(this.selectIndex))
+    // console.log(JSON.stringify(this.data))
+    // console.log('picker-created', JSON.stringify(this.selectIndex))
     if (this.selectIndex.length === 0) {
       this.selectIndex = []
       for (let i = 0; i < this.pickerData.length; i++) {
@@ -129,7 +129,7 @@ export default {
         console.log('value-change')
         this.$emit(VALUE_CHANGE)
       }
-      console.log(JSON.stringify(this.selectIndex), JSON.stringify(this.selectVal), JSON.stringify(this.selectText))
+      // console.log(JSON.stringify(this.selectIndex), JSON.stringify(this.selectVal), JSON.stringify(this.selectText))
       this.$emit(ON_OK, this.selectVal)
     },
     cancel () {
@@ -151,6 +151,7 @@ export default {
     },
     setData (data) {
       this.pickerData = data
+      this.refresh()
     },
     scrollTo (index, dist) {
       const wheel = this.wheels[index]
@@ -158,6 +159,7 @@ export default {
       wheel.wheelTo(dist)
     },
     refresh () {
+      console.log('refresh......')
       this.$nextTick(() => {
         this.wheels.forEach(item => {
           item.refresh()
@@ -180,6 +182,7 @@ export default {
           swipeTime: 1000
         })
         this.wheels[i].on('scrollEnd', () => {
+          console.log('滑动结束')
           // console.log('滑动对应的列数:', i, '滑动选中的index:', this.wheels[i].getSelectedIndex(), '滑动选中的value:', this.pickerData[i][this.wheels[i].getSelectedIndex()].text)
           this.$emit(ON_CHANGE, i, this.wheels[i].getSelectedIndex())
         })
@@ -194,6 +197,12 @@ export default {
         return !item.isInTransition
       })
     }
+  },
+  beforeDestroy () {
+    this.wheels && this.wheels.forEach(item => {
+      item.destory()
+    })
+    this.wheels = null
   }
 }
 </script>

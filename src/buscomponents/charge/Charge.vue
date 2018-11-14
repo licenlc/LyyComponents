@@ -21,10 +21,17 @@
 
 <script>
 import TransferDom from '@/directives/v-transfer-dom'
+
 export default {
   name: 'life-charge',
   directives: {
     TransferDom
+  },
+  props: {
+    value: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
@@ -32,8 +39,17 @@ export default {
       curValue: false
     }
   },
+  created () {
+    this.curValue = this.value
+  },
+  watch: {
+    curValue (val) {
+      this.$emit('input', val)
+    }
+  },
   methods: {
     handlerItem (obj) {
+      this.curValue = false
       this.$emit('on-select', obj)
     }
   }

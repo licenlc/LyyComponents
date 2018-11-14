@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/demos/HelloWorld'
+import Index from '@/demos/Index'
 import Input from '@/demos/Input'
 import Picker from '@/demos/Picker'
 import upload from '@/demos/upload'
 import service from '@/demos/Service'
 import dialog from '@/demos/Dialog'
-// import DatePicker from '@/demos/DatePicker'
+import DatePicker from '@/demos/DatePicker'
 
 Vue.use(Router)
 
@@ -14,8 +14,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'index',
+      component: Index
     },
     {
       path: '/input',
@@ -41,6 +41,11 @@ export default new Router({
       path: '/dialog',
       name: 'dialog',
       component: dialog
+    },
+    {
+      path: '/date',
+      name: 'datePicker',
+      component: DatePicker
     }
   ]
 })

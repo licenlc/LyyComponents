@@ -1,8 +1,8 @@
 <template>
-  <Dialog :title="title" :content="content" :titleClass="titleClass">
-      <p slot="content" :class="contentClass">
+  <Dialog :title="title" v-transfer-dom :content="content" :titleClass="titleClass" v-if="visible">
+      <p slot="content" class="content" :class="contentClass">
         <span class="content-money">￥</span>
-        <span class="content-num">{{msg}}</span>
+        <span class="content-num">{{content}}</span>
       </p>
       <div slot="footer" class="life-dialog-footer">
          <a href="javascript:;" class="life-btn life-btn-cancel">取消</a>
@@ -12,11 +12,16 @@
 </template>
 
 <script>
+import TransferDom from '@/directives/v-transfer-dom'
 import Dialog from '@/components/dialog/Dialog'
+
 export default {
   name: 'life-dialog',
   components: {
     Dialog
+  },
+  directives: {
+    TransferDom
   },
   props: {
     titleClass: String,
@@ -26,12 +31,13 @@ export default {
   },
   data () {
     return {
+      visible: true
     }
   },
   computed: {
     contentClass () {
       let cls = ''
-      switch(this.type) {
+      switch (this.type) {
         case 'chair':
           cls = 'chair-content'
           break
@@ -40,6 +46,12 @@ export default {
           break
       }
       return cls
+    }
+  },
+  methods: {
+    // 测试方法
+    show () {
+      this.visible = true
     }
   }
 }
@@ -50,9 +62,9 @@ export default {
   display: flex;
   justify-content: space-between;
   .life-btn{
-    padding: 10px;
+    padding: 10px 18px;
     border: 1px solid #E9E9E9;
-    border-radius: 10px;
+    border-radius: 18px;
   }
   .life-btn-cancel{
     color: #999;

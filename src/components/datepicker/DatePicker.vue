@@ -1,7 +1,8 @@
 <template>
   <picker :data = "data"
-    @value-change="dateChange"
+    @on-change="dateChange"
     @on-ok="onOk"
+
     :defaultIndex="[0, 0, 0]" ref="datepicker"></picker>
 </template>
 
@@ -9,7 +10,7 @@
 import Picker from '@/components/picker/Picker'
 import {getDays} from './utils'
 
-// const currentYear = new Date().getFullYear()
+const currentYear = new Date().getFullYear()
 // const DATE_TYPE = ['year-month', 'date', 'datetime', 'time']
 
 function getArrText (min, max, formatString) {
@@ -37,11 +38,11 @@ export default {
     },
     max: {
       type: Number,
-      default: 2025
+      default: currentYear + 14
     },
     min: {
       type: Number,
-      default: 2008
+      default: currentYear - 18
     },
     defaultValue: {
       type: Date
@@ -64,6 +65,7 @@ export default {
     }
   },
   created () {
+    console.log(this.min, this.max)
     this.selectYear = this.year[0]
     this.selectMonth = this.month[0]
   },
@@ -89,7 +91,7 @@ export default {
       return getArrText(1, 60, '分')
     },
     data () {
-      console.log('dataInfo======')
+      console.log(this.day)
       if (this.type === 'date') {
         return [this.year, this.month, this.day]
       } else if (this.type === 'year-month') {
@@ -133,6 +135,7 @@ export default {
       this.$emit('input', this.dateValue)
     },
     onOk () {
+      this.$toast(this.dateValue)
       this.emit('input', this.dateValue)
     }
   }

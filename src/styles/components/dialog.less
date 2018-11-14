@@ -1,8 +1,10 @@
 .dv-dialog-wrapper{
     width: 80%;
-    background-color: #fff;
+    background-color: @body-background;
     text-align: center;
     border-radius: 10px;
+    box-sizing: border-box;
+
     .title{
         padding-top: 18px;
         font-weight: 600;
@@ -18,7 +20,7 @@
         border-top: 1px solid @border-color-split;
         .dialog-btn{
             flex: 1;
-            padding: 16px;
+            padding: 18px;
         }
         .dialog-cancel{
             border-right: 2px solid @border-color-split;

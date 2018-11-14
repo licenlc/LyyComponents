@@ -1,11 +1,15 @@
 <template>
-    <div class="container">
-      <div @click="showPicker" style="padding: 10px;width:80px;display:inline-block;text-align:center;">点击</div>
-      <div @click="showPicker2" style="padding: 10px;width:80px;display:inline-block;text-align:center;">点击</div>
+    <div>
+        <div class="demo-title">
+          Picker选择器
+        </div>
+        <ul>
+          <li @click="showPicker" style="text-align:center;" class="demo-list">单列picker</li>
+          <li @click="showPicker2" style="text-align:center;" class="demo-list">多列picker</li>
+        </ul>
       <span style="color: red; font-size: 18px; text-align: center;">{{dateValue}}</span>
-      <picker title="标题111" :data="data" ref="picker" :defaultIndex="[3]"/>
-      <picker title="标题222" :data="data" ref="picker" :defaultIndex="[3]"/>
-
+      <picker title="单列picker" :data="data" ref="picker" :defaultIndex="[3]"/>
+      <picker title="多列picker" :data="data" ref="picker" :defaultIndex="[3]"/>
     </div>
 </template>
 
@@ -16,14 +20,6 @@ export default {
   components: {
     Picker
   },
-  watch: {
-    'visible': function (newValue, oldVal) {
-      console.log(newValue)
-    },
-    dateValue (val) {
-      console.log('获取时间：', val)
-    }
-  },
   data () {
     return {
       visible: false,
@@ -31,7 +27,6 @@ export default {
       pickerList: [],
       dateValue: '',
       inputValue: ''
-      // pickerList: ['浙江', '武汉', '长沙', '上海', '杭州', '深圳', '广州', '宁波', '北京', '天津']
     }
   },
   created () {
@@ -44,10 +39,6 @@ export default {
       data4.push({text: i, value: i})
     }
     this.data = [data2]
-    // this.data = [data, data3]
-    // for (let i = 1; i < 135; i++) {
-    //   this.pickerList.push(i)
-    // }
   },
   methods: {
     showPicker () {

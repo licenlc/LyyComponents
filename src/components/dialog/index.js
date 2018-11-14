@@ -19,24 +19,20 @@ let instanceT = null
 
 let getInstance = () => {
   if (instanceT) {
-    return
+    return instanceT
   }
   instanceT = new DialogConstructor({
     el: document.createElement('div')
   })
+  return instanceT
 }
 
 let $Dialog = (opts) => {
-  console.log('opts:', opts)
   opts = Object.assign(DEFAULT, opts)
-  console.log(opts)
-  getInstance()
-  let instance = instanceT
+  let instance = getInstance()
   for (const key in opts) {
-    console.log(`${key}=${opts[key]}`)
     instance[key] = opts[key]
   }
-  console.log(instance)
   document.body.appendChild(instance.$el)
   Vue.nextTick(() => {
     instance.visible = true
@@ -44,7 +40,8 @@ let $Dialog = (opts) => {
 }
 
 let alert = (opts) => {
-  let tempOpts = JSON.parse(JSON.stringify(DEFAULT))
+  console.log('传递的参数：', opts)
+  let tempOpts = opts
   if (typeof opts === 'string') {
     tempOpts.content = opts
     tempOpts.title = '温馨提示'

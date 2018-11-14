@@ -7,14 +7,14 @@
                   <p class="title" v-html="title" v-if="title"></p>
                 </slot>
                 <slot name="content">
-                  <p class="content" :class="contentClass">
+                  <p class="content" :class="contentClass" :style="showCancel?'':'text-align:center;'">
                     {{content}}
                   </p>
                 </slot>
                 <slot name="footer">
                   <div class="dialog-btns">
-                    <a href="javascript:;" class="dialog-btn dialog-cancel" v-if="showCancel" @click="handlerAction('cancel')">{{cancelText}}</a>
-                    <a href="javascript:;" class="dialog-btn dialog-ok" @click="handlerAction('ok')">{{okText}}</a>
+                    <p class="dialog-btn dialog-cancel" v-if="showCancel" @click="handlerAction('cancel')">{{cancelText}}</p>
+                    <p class="dialog-btn dialog-ok" @click="handlerAction('ok')">{{okText}}</p>
                   </div>
                 </slot>
             </div>
@@ -45,11 +45,14 @@ export default {
     },
     onOK: {
       type: Function,
-      default: () => {}
+      default: () => {
+        console.log('onOk')
+      }
     },
     onCancel: {
       type: Function,
-      default: () => {}
+      default: () => {
+      }
     }
   },
   data () {
@@ -61,12 +64,12 @@ export default {
     handlerAction (type) {
       this.visible = false
       if (type === 'ok') {
-        this.onOK && this.onOk()
+        this.onOK && this.onOK()
         this.$emit('on-OK')
+      } else if (type === 'cancel') {
+        this.onCancel && this.onCancel()
+        this.$emit('on-cancel')
       }
-    },
-    show () {
-      this.visible = true
     }
   }
 }

@@ -65,7 +65,7 @@ export default {
       type: Boolean,
       default: false
     },
-    failIcon: {
+    startFail: {
       type: String,
       default: ''
     },
