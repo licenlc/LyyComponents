@@ -17,6 +17,7 @@
     "better-scroll": "^1.13.2",
     "vanilla-masker": "^1.2.0",
     "vue": "^2.5.2",
+    "vue-create-api": "^0.2.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

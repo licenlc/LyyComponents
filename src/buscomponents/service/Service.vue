@@ -16,19 +16,21 @@
                 </li>
                 <li class="pro-item">
                   <i class="icon"/>
-                  <p>支付失败2</p>
+                  <p>支付失败</p>
                 </li>
                 <li class="pro-item">
                   <i class="icon"/>
-                  <p>支付失败3</p>
-                </li>
-                <li class="pro-item">
-                  <i class="icon"/>
-                  <p>支付失败4</p>
+                  <p>申述反馈</p>
                 </li>
                 <li class="pro-item" v-if="guide">
                   <i class="icon"/>
-                  <p>支付失败4</p>
+                  <p>用户指南</p>
+                </li>
+              </ul>
+              <ul class="flex">
+               <li class="pro-item" >
+                  <i class="icon"/>
+                  <p>解除占用</p>
                 </li>
               </ul>
           </div>
@@ -40,10 +42,10 @@
                   <i class="icon"/>
                   <p>乐摇摇微信公众号</p>
                 </li>
-                <li class="pro-item">
+                <!-- <li class="pro-item">
                   <i class="icon"/>
                   <p>支付失败</p>
-                </li>
+                </li> -->
               </ul>
           </div>
         </section>
