@@ -35,7 +35,6 @@ let Toast = (opts = {}) => {
   instance.className = opts.className || ''
   instance.icon = opts.icon || ''
   instance.type = opts.type || ''
-  instance.position = opts.position || ''
   document.body.appendChild(instance.$el)
   Vue.nextTick(() => {
     instance.visible = true

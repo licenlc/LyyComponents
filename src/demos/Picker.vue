@@ -8,8 +8,8 @@
           <li @click="showPicker2" style="text-align:center;" class="demo-list">多列picker</li>
         </ul>
       <span style="color: red; font-size: 18px; text-align: center;">{{dateValue}}</span>
-      <picker title="单列picker" :data="data" ref="picker" :defaultIndex="[3]"/>
-      <picker title="多列picker" :data="data" ref="picker" :defaultIndex="[3]"/>
+      <picker title="单列picker" :data="data" ref="picker" :defaultIndex="[10]"/>
+      <picker title="多列picker" :data="data2" ref="picker2" :defaultIndex="[3, 2]"/>
     </div>
 </template>
 
@@ -24,21 +24,23 @@ export default {
     return {
       visible: false,
       data: [],
+      data2: [],
       pickerList: [],
       dateValue: '',
       inputValue: ''
     }
   },
   created () {
-    let data2 = []
+    let data = []
     for (let i = 0; i < 100; i++) {
-      data2.push({text: i + 100, value: i})
+      data.push({text: i + 100, value: i})
     }
-    let data4 = []
+    this.data = [data]
+    let data2 = []
     for (let i = 999; i > 800; i--) {
-      data4.push({text: i, value: i})
+      data2.push({text: i, value: i})
     }
-    this.data = [data2]
+    this.data2 = [data, data2]
   },
   methods: {
     showPicker () {
@@ -47,7 +49,7 @@ export default {
     },
     showPicker2 () {
       this.visible = true
-      this.$refs.datepicker.showPicker()
+      this.$refs.picker2.showPicker()
     }
   }
 

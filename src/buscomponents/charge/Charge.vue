@@ -3,16 +3,21 @@
     <div class="lyy-charge" v-transfer-dom v-show="curValue" @click="curValue=false" @touchmove.prevent>
       <transition name="picker-content-fade">
         <section class="charge-wrapper" v-show="curValue" @click.stop>
-          <div class="charge-title">
-            请选择充值金额
-          </div>
-          <slot name="chargeList">
+          <slot name="title">
+            <div class="charge-title">
+              请选择充值金额
+            </div>
+          </slot>
+          <slot name="content">
+            <!-- 充值列表 -->
             <ul class="charge-wrapper">
               <li class="charge-item" v-for="(item, index) in chargeList" :key="index" @click="handlerItem(item)">
               </li>
             </ul>
           </slot>
-          <p>若充值失败， 30分钟内自动返回钱包</p>
+          <slot name="footer">
+            <p>若充值失败， 30分钟内自动返回钱包</p>
+          </slot>
         </section>
       </transition>
     </div>

@@ -1,9 +1,19 @@
 <template>
-    <div class="container">
-      <div @click="showPicker2" style="padding: 10px;width:80px;display:inline-block;text-align:center;">点击</div>
-      <span style="color: red; font-size: 18px; text-align: center;">{{dateValue}}</span>
-      <date-picker ref="datepicker" v-model="dateValue"/>
-    </div>
+  <div>
+      <div class="demo-title">
+        DatePicker组件
+      </div>
+      <ul>
+        <li class="demo-list" @click="showDatePicker">年</li>
+        <li class="demo-list" @click="showDatePicker1">年月</li>
+        <li class="demo-list" @click="showDefault">年月日(默认)</li>
+        <li class="demo-list" @click="showDatePicker2">年月日时分秒</li>
+      </ul>
+      <date-picker ref="datepicker1" type="year" v-model="dateValue"/>
+      <date-picker ref="datepicker2" type="month" v-model="dateValue1"/>
+      <date-picker ref="datepicker" v-model="dateValue2"/>
+      <date-picker ref="datepicker3" type="datetime" v-model="dateValue3"/>
+  </div>
 </template>
 
 <script>
@@ -13,31 +23,35 @@ export default {
   components: {
     DatePicker
   },
-  watch: {
-    'visible': function (newValue, oldVal) {
-      console.log(newValue)
-    },
-    dateValue (val) {
-      console.log('获取时间：', val)
-    }
-  },
   data () {
     return {
       visible: false,
-      data: [],
-      pickerList: [],
       dateValue: '',
+      dateValue1: '',
+      dateValue2: '',
+      dateValue3: '',
       inputValue: ''
     }
   },
   methods: {
-    showPicker () {
-      this.visible = true
-      this.$refs.picker.showPicker()
-    },
-    showPicker2 () {
-      this.visible = true
+    showDefault () {
       this.$refs.datepicker.showPicker()
+    },
+    showDatePicker () {
+      this.visible = true
+      this.$refs.datepicker1.showPicker()
+    },
+    showDatePicker1 () {
+      this.visible = true
+      this.$refs.datepicker2.showPicker()
+    },
+    showDatePicker2 () {
+      this.visible = true
+      this.$refs.datepicker3.showPicker()
+    },
+    showDatePicker3 () {
+      this.visible = true
+      this.$refs.datepicker3.showPicker()
     }
   }
 

@@ -2,16 +2,16 @@
   <picker :data = "data"
     @on-change="dateChange"
     @on-ok="onOk"
-
     :defaultIndex="[0, 0, 0]" ref="datepicker"></picker>
 </template>
 
 <script>
 import Picker from '@/components/picker/Picker'
 import {getDays} from './utils'
+import {oneOf} from '@/components/utils/assist'
 
 const currentYear = new Date().getFullYear()
-// const DATE_TYPE = ['year-month', 'date', 'datetime', 'time']
+const DATE_TYPE = ['year', 'month', 'date', 'datetime', 'time']
 
 function getArrText (min, max, formatString) {
   const textArr = []
@@ -29,8 +29,10 @@ export default {
   },
   props: {
     type: {
-      type: String,
-      default: 'date'
+      default: 'date',
+      validator (value) {
+        return oneOf(value, DATE_TYPE)
+      }
     },
     format: {
       type: String,
@@ -91,17 +93,16 @@ export default {
       return getArrText(1, 60, '分')
     },
     data () {
-      console.log(this.day)
       if (this.type === 'date') {
         return [this.year, this.month, this.day]
-      } else if (this.type === 'year-month') {
+      } else if (this.type === 'month') {
         return [this.year, this.month]
       } else if (this.type === 'datetime') {
         return [this.year, this.month, this.day, this.hours, this.minutes]
       } else if (this.type === 'time') {
         return [this.hours, this.minutes]
-      } else {
-        console.error('type is not right')
+      } else if (this.type === 'year') {
+        return [this.year]
       }
     }
   },
@@ -134,9 +135,13 @@ export default {
       console.log('getValue:', this.dateValue)
       this.$emit('input', this.dateValue)
     },
-    onOk () {
-      this.$toast(this.dateValue)
-      this.emit('input', this.dateValue)
+    onOk (indexArr, valueArr, textArr) {
+      this.$toast({
+        msg: indexArr.join('-')
+      })
+      console.log('DatePicker:', indexArr.join('-'))
+      this.$emit('on-ok', indexArr)
+      this.$emit('input', indexArr)
     }
   }
 }

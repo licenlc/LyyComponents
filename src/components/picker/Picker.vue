@@ -73,13 +73,10 @@ export default {
   },
   watch: {
     data (value, oldValue) {
-      // console.log(JSON.stringify(value), JSON.stringify(oldValue))
       this.setData(value)
     }
   },
   created () {
-    // console.log(JSON.stringify(this.data))
-    // console.log('picker-created', JSON.stringify(this.selectIndex))
     if (this.selectIndex.length === 0) {
       this.selectIndex = []
       for (let i = 0; i < this.pickerData.length; i++) {
@@ -95,12 +92,12 @@ export default {
       }
       this.show = true
       if (this.wheels.length === 0) {
-        // this.$nextTick(() => {
-        //   })
-        let wheelWrapper = this.$refs.wheelWrapperRef
-        for (let i = 0; i < this.pickerData.length; i++) {
-          this.createWheel(wheelWrapper, i)
-        }
+        this.$nextTick(() => {
+          let wheelWrapper = this.$refs.wheelWrapperRef
+          for (let i = 0; i < this.pickerData.length; i++) {
+            this.createWheel(wheelWrapper, i)
+          }
+        })
       } else {
         for (let i = 0; i < this.pickerData.length; i++) {
           this.wheels[i].enable()
@@ -109,28 +106,33 @@ export default {
       }
     },
     onOk () {
-      console.log(this._canClickOK())
       if (!this._canClickOK()) {
         return
       }
-      let oldSelectIndex = this.selectIndex.join(',')
-      console.log('oldSelectIndex:', oldSelectIndex)
       this.hidePicker()
+      let oldSelectIndex = this.selectIndex.join(',')
       for (let i = 0; i < this.pickerData.length; i++) {
-        console.log('===============:', this.wheels[i].getSelectedIndex())
         let index = this.wheels[i].getSelectedIndex()
         this.selectIndex[i] = index
         this.selectVal[i] = this.pickerData[i][index].value
         this.selectText[i] = this.pickerData[i][index].text
       }
       let newSlelectIndex = this.selectIndex.join(',')
-      console.log('newSlelectIndex:', newSlelectIndex)
       if (oldSelectIndex !== newSlelectIndex) {
-        console.log('value-change')
+        this.$toast('value-change')
         this.$emit(VALUE_CHANGE)
       }
-      // console.log(JSON.stringify(this.selectIndex), JSON.stringify(this.selectVal), JSON.stringify(this.selectText))
+      console.log(JSON.stringify(this.selectIndex), JSON.stringify(this.selectVal), JSON.stringify(this.selectText))
+      // this.$toast({msg: `下标：${this.selectIndex}； 选中的值：${this.selectVal}; 选中的文本${this.selectText}`})
       this.$emit(ON_OK, this.selectVal)
+      if (this.pickerData.length === 1) {
+        if (process.env.NODE_ENV === 'development') {
+          console.log(process.env.NODE_ENV)
+          this.$toast({msg: `环境测试：${this.selectText[0]}`})
+        }
+        console.log(this.selectText[0])
+        this.$emit('input', this.selectText[0])
+      }
     },
     cancel () {
       this.show = false
@@ -141,11 +143,6 @@ export default {
     hidePicker () {
       this.show = false
       this.wheels.forEach(item => {
-        for (let key in item) {
-          if (key === 'selectedIndex') {
-            console.log(key, '-', item[key])
-          }
-        }
         item.disable()
       })
     },
@@ -167,23 +164,22 @@ export default {
       })
     },
     createWheel (wheelWrapper, i) {
-      console.log('createWheel- 151:', this.defaultIndex[i])
+      console.log('默认下标:', this.defaultIndex[i])
       if (!this.wheels[i]) {
         this.wheels[i] = new BScroll(wheelWrapper.children[i], {
           wheel: {
-            selectedIndex: 3,
+            selectedIndex: this.defaultIndex[i] || 0,
             rotate: 0,
             wheelWrapperClass: 'wheel-scroll',
             wheelItemClass: 'wheel-item',
             useTransform: true
           },
           probeType: 3,
-          bounceTime: 600,
+          bounceTime: 300,
           swipeTime: 1000
         })
         this.wheels[i].on('scrollEnd', () => {
-          console.log('滑动结束')
-          // console.log('滑动对应的列数:', i, '滑动选中的index:', this.wheels[i].getSelectedIndex(), '滑动选中的value:', this.pickerData[i][this.wheels[i].getSelectedIndex()].text)
+          // this.$toast(`列数：${i}; 下标：${this.wheels[i].getSelectedIndex()}; value: ${this.pickerData[i][this.wheels[i].getSelectedIndex()].text}`)
           this.$emit(ON_CHANGE, i, this.wheels[i].getSelectedIndex())
         })
       } else {
@@ -192,7 +188,10 @@ export default {
       return this.wheels[i]
     },
     _canClickOK () {
-      console.log('是否在滑动:', this.wheels[0].isInTransition)
+      this.$toast({
+        msg: `是否在滑动：${this.wheels[0].isInTransition}`,
+        duration: 1000
+      })
       return this.wheels.every(item => {
         return !item.isInTransition
       })
@@ -200,7 +199,7 @@ export default {
   },
   beforeDestroy () {
     this.wheels && this.wheels.forEach(item => {
-      item.destory()
+      // item.destory()
     })
     this.wheels = null
   }

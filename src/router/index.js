@@ -6,6 +6,7 @@ import Picker from '@/demos/Picker'
 import upload from '@/demos/upload'
 import service from '@/demos/Service'
 import dialog from '@/demos/Dialog'
+import Toast from '@/demos/Toast'
 import DatePicker from '@/demos/DatePicker'
 
 Vue.use(Router)
@@ -46,6 +47,11 @@ export default new Router({
       path: '/date',
       name: 'datePicker',
       component: DatePicker
+    },
+    {
+      path: '/toast',
+      name: 'toast',
+      component: Toast
     }
   ]
 })

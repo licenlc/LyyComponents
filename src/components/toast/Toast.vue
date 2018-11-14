@@ -22,8 +22,7 @@ export default {
     type: {
       type: String,
       default: 'success'
-    },
-    className: String
+    }
   },
   computed: {
     customClass () {
@@ -42,15 +41,16 @@ export default {
       return classList.join(' ')
     }
   },
-  watch: {
-    visible (val, oldVal) {
-      console.log('visible:', val)
-    }
-  },
   data () {
     return {
-      visible: false
+      visible: false,
+      timer: null
     }
+  },
+  beforeDestroy () {
+    console.log('销毁')
+    this.visible = false
+    clearTimeout(this.timer)
   }
 }
 </script>

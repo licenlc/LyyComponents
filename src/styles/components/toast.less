@@ -1,17 +1,22 @@
 .dv-toast{
-    padding: 20px;
     position: fixed;
-    max-width: 80%;
-    border-radius: 5px;
-    background: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    box-sizing: border-box;
-    text-align: center;
     z-index: 1000;
-    transition: opacity .3s linear
-}
-.dv-toast-middle {
+    max-width: 80%;
     left: 50%;
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+}
+.dv-toast-middle{
     top: 50%;
-    transform: translate(-50%,-50%);
+}
+.dv-toast-top{
+    top: 0%;
+}
+.dv-toast-bottom{
+    bottom: 10%;
 }

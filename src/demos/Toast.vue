@@ -1,36 +1,29 @@
 <template>
-    <div class="">
-      <div>
-        <button @click="showDialog">展示对话框1</button>
-        <button @click="showDialog2">展示对话框2</button>
-        <button @click="showPopup=true">popup展示</button>
+  <div>
+      <div class="demo-title">
+        Toast组件
       </div>
-      <div>
-         <button @click="showLifeDialog">展示生活类对话框</button>
-      </div>
-    </div>
+      <ul>
+        <li class="demo-list" @click="defaultToast">默认toast</li>
+        <li class="demo-list" @click="coutomToast">自定义toast</li>
+      </ul>
+  </div>
 </template>
 
 <script>
 
 export default {
-  data () {
-  },
   methods: {
-    showDialogInfo () {
-      this.$dialog({
-        title: '标题',
-        content: '开导开导看到',
-        onOK: () => {
-          console.log('点击确认按钮')
-        }
-      })
+    defaultToast () {
+      this.$toast('默认toa水电费是范德萨的ddgdfgdfgdgd发生水电费水电费是st')
     },
-    showAlert2 () {
-      this.$alert({
-        title: 'alert对胡',
-        content: '快点快点快点看',
-        okText: '我知道了'
+    coutomToast () {
+      this.$toast({
+        duration: 4000,
+        msg: 'ldldl1{}',
+        position: 'bottom',
+        type: '',
+        icon: ''
       })
     }
   }

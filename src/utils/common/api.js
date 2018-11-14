@@ -1,7 +1,16 @@
+let prefix = ''
+if (process.env.NODE_ENV === 'production') {
+  prefix = '生产'
+} else if (process.env.NODE_ENV === 'production') {
+  prefix = '测试'
+} else {
+  prefix = '开发'
+}
+
 const API = {
   // 公共
   com: {
-    order: ''
+    order: `${prefix}/wxpay/`
   },
   // 支付
   pay: {

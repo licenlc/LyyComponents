@@ -5,8 +5,8 @@
         <span class="content-num">{{content}}</span>
       </p>
       <div slot="footer" class="life-dialog-footer">
-         <a href="javascript:;" class="life-btn life-btn-cancel">取消</a>
-         <a href="javascript:;" class="life-btn life-btn-ok">确定</a>
+         <p class="life-btn life-btn-cancel">取消</p>
+         <p class="life-btn life-btn-ok">确定</p>
       </div>
   </Dialog>
 </template>
@@ -27,7 +27,10 @@ export default {
     titleClass: String,
     title: String,
     content: String,
-    type: String
+    type: {
+      type: String,
+      required: true
+    }
   },
   data () {
     return {
@@ -44,14 +47,11 @@ export default {
         case 'washer':
           cls = 'washer-content'
           break
+        case 'charge':
+          cls = 'charge-content'
+          break
       }
       return cls
-    }
-  },
-  methods: {
-    // 测试方法
-    show () {
-      this.visible = true
     }
   }
 }

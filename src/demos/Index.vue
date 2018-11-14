@@ -23,57 +23,22 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'index',
   data () {
     return {
       list: [
         {name: 'Dialog对话框', path: 'dialog'},
-        {name: 'upload文件上传(待完善)', path: 'upload'},
-        {name: 'picker(待完善)', path: 'picker'},
+        {name: 'Toast提示', path: 'toast'},
+        {name: 'Upload文件上传(待完善)', path: 'upload'},
+        {name: 'Picker(功能待完善，可以使用)', path: 'picker'},
         {name: 'DatePicker日期选择器', path: 'date'},
-        {name: 'tosat', path: 'toast'},
-        {name: 'input输入框', path: 'input'}
+        {name: 'Input输入框', path: 'input'}
       ],
       custome: [
-        {name: '客服弹框和充值弹框', path: 'service'}
+        {name: '客服弹框(Service)和充值弹框(Charge)', path: 'service'}
+        // {name: '生活类公用弹框(lifeDialog)', path: 'lifeDialog'}
       ]
     }
   }
 }
 </script>
-
-<style lang="less">
-li{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.demo-title{
-  font-size: 18px;
-  padding: 14px;
-  background-color:#f0f0f0;
-  font-weight: 400;
-}
-.demo-list{
-  box-sizing: border-box;
-  padding: 12px;
-  padding-left: 20px;
-  position:relative;
-  font-size: 16px;
-  border-bottom: 1px solid #f0f0f0;
-  width: 100%;
-  text-align:left;
-  font-weight: 400;
-  .left{
-    width: 8px;
-    height: 8px;
-    display: inline-block;
-    border-top: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    transform: rotate(135deg);
-  }
-}
-</style>

@@ -58,7 +58,7 @@ export default {
     },
     addFiles (files) {
       const length = files.length
-      const newFiles = []
+      // const newFiles = []
       for (let i = 0; i < length; i++) {
         if (files[i]) {
           console.log('addFiles', files[i])
