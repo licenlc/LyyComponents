@@ -29,4 +29,3 @@ export function isStr (value) {
 export function isFunction (fn) {
   return typeof fn === 'function'
 }
-

@@ -1,12 +1,13 @@
-import instantiateComponent from './instantiate'
-import parseRenderData from './parse'
-import { isFunction, isUndef, isStr } from './util'
+import instantiateComponent from '@/create/instantiate'
+import parseRenderData from '@/create/parse'
+import { isFunction, isUndef, isStr } from '@/create/util'
 
 const eventBeforeDestroy = 'hook:beforeDestroy'
 
 export default function apiCreator (Component, events = [], single = false) {
+  debugger
   let Vue = this
-  // let currentSingleComp
+  let currentSingleComp
   let singleMap = {}
   const beforeHooks = []
 
@@ -20,6 +21,7 @@ export default function apiCreator (Component, events = [], single = false) {
       ins.updateRenderData(renderData, renderFn)
       ins.$forceUpdate()
       currentSingleComp = comp
+      console.log(currentSingleComp)
       return comp
     }
     const component = instantiateComponent(Vue, Component, renderData, renderFn, options)

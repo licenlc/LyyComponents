@@ -6,6 +6,7 @@
       <ul>
         <li class="demo-list" @click="defaultToast">默认toast</li>
         <li class="demo-list" @click="coutomToast">自定义toast</li>
+        <li class="demo-list" @click="coutomToast2">creatToast</li>
       </ul>
   </div>
 </template>
@@ -25,6 +26,13 @@ export default {
         type: '',
         icon: ''
       })
+    },
+    coutomToast2 () {
+      this.$$dvToast({
+        duration: 3000,
+        msg: 'crateAOI',
+        visible: true
+      }).show()
     }
   }
 }

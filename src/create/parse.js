@@ -1,4 +1,4 @@
-import { camelize } from './util'
+import { camelize } from '@/create/util'
 
 export default function parseRenderData (data = {}, events = {}) {
   events = parseEvents(events)

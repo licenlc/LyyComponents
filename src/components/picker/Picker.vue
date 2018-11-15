@@ -2,7 +2,7 @@
   <transition name="dv-mask">
     <div class="picker"  v-transfer-dom v-show="show" @click="show=false" @touchmove.prevent>
       <transition name="picker-content-fade">
-        <div class="picker-wrapper" v-show="show" @click.stop>
+        <section class="picker-wrapper" v-show="show" @click.stop>
           <!-- 头部区 -->
           <div class="picker-header">
               <div class="picker-btn picker-cancel" @click="hidePicker">{{cancelText}}</div>
@@ -19,9 +19,9 @@
                 <div class="picker-select"></div>
              </div>
             </div>
-          <!-- 内容区 -->
           </div>
-        </div>
+          <!-- 内容区 end-->
+        </section>
       </transition>
     </div>
   </transition>

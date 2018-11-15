@@ -1,12 +1,13 @@
-import { camelize, escapeReg, isBoolean } from './util'
-import { assert } from './debug'
-import apiCreator from './creator'
-import instantiateComponent from './instantiate'
+import { camelize, escapeReg, isBoolean } from '@/create/util'
+import { assert } from '@/create/debug'
+import apiCreator from '@/create/creator'
+import instantiateComponent from '@/create/instantiate'
 
 function install (Vue, options = {}) {
   const {componentPrefix = '', apiPrefix = '$create-'} = options
 
   Vue.createAPI = function (Component, events, single) {
+    // debugger
     if (isBoolean(events)) {
       single = events
       events = []
