@@ -5,7 +5,6 @@ import { isFunction, isUndef, isStr } from '@/create/util'
 const eventBeforeDestroy = 'hook:beforeDestroy'
 
 export default function apiCreator (Component, events = [], single = false) {
-  debugger
   let Vue = this
   let currentSingleComp
   let singleMap = {}

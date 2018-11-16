@@ -1,40 +1,31 @@
 <template>
   <div class="dv-file-list">
     <slot>
-      <div class="upload-file" :style="fileStyle">
+      <i class="upload-reomve" @click="removeFile"></i>
+      <img :src="file.url" class="upload-file">
+      <div class="dv-upload-state">
+        <span class="upload-process">100%</span>
+        <i class="upload-state-icon"></i>
       </div>
     </slot>
   </div>
 </template>
 
 <script>
+import mixin from './mixin'
+
 export default {
   name: 'upload-file-list',
-  porps: {
+  mixins: [mixin],
+  props: {
     file: {
       type: Object,
       required: true
     }
   },
-  computed: {
-    fileStyle () {
-      const url = this.file.url || this.file.base64
-      if (!url) {
-        return
-      }
-      return {
-        'background-image': `url(${url})`
-      }
-    }
-  },
   methods: {
     removeFile () {
       this.$emit('on-remove', this.file)
-    }
-  },
-  watch: {
-    file (value) {
-      console.log(value)
     }
   }
 }

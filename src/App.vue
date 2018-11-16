@@ -26,29 +26,25 @@ li{
 }
 .demo-title{
   font-size: 18px;
-  padding: 14px;
+  padding: 18px;
   background-color:#f0f0f0;
   font-weight: 400;
 }
 .demo-list{
   box-sizing: border-box;
-  padding: 14px;
-  padding-left: 20px;
-  position:relative;
+  padding: 16px;
   font-size: 16px;
   border-bottom: 1px solid #f0f0f0;
-  width: 100%;
-  text-align:left;
   font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   .left{
     width: 8px;
     height: 8px;
     display: inline-block;
     border-top: 1px solid #ccc;
     border-left: 1px solid #ccc;
-    position: absolute;
-    top: 15px;
-    right: 20px;
     transform: rotate(135deg);
   }
 }

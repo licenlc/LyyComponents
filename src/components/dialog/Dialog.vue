@@ -1,6 +1,6 @@
 <template>
   <transition name="dv-mask">
-      <div class="picker" v-show="visible" @click="visible=false" @touchmove.prevent>
+      <div class="picker popup-mask" v-show="visible" @click="visible=false" @touchmove.prevent>
         <transition name="dv-dialog">
             <div class="dv-dialog-wrapper" :class="titleClass" v-show="visible" @click.stop>
                 <slot name="title">

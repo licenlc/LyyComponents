@@ -1,7 +1,8 @@
 <template>
    <transition name="dv-mask">
-    <div class="lyy-charge" v-transfer-dom v-show="curValue" @click="curValue=false" @touchmove.prevent>
+    <div class="popup-mask" v-transfer-dom v-show="curValue" @click="curValue=false" @touchmove.prevent>
       <transition name="picker-content-fade">
+        <!-- 充值弹框 -->
         <section class="charge-wrapper" v-show="curValue" @click.stop>
           <slot name="title">
             <div class="charge-title">
@@ -10,15 +11,17 @@
           </slot>
           <slot name="content">
             <!-- 充值列表 -->
-            <ul class="charge-wrapper">
+            <ul class="charge-wrapper-list" @click="curValue=false">
               <li class="charge-item" v-for="(item, index) in chargeList" :key="index" @click="handlerItem(item)">
               </li>
             </ul>
           </slot>
           <slot name="footer">
-            <p>若充值失败， 30分钟内自动返回钱包</p>
+            <p class="charge-footer">若充值失败，30分钟内自动返回微信钱包</p>
           </slot>
+          <section class="charge-mask" v-show="maskFlag"></section>
         </section>
+        <!-- 蒙版 -->
       </transition>
     </div>
   </transition>
@@ -41,20 +44,25 @@ export default {
   data () {
     return {
       chargeList: [],
-      curValue: false
+      curValue: this.value,
+      maskFlag: false
     }
   },
-  created () {
-    this.curValue = this.value
-  },
   watch: {
+    value (val) {
+      this.curValue = val
+      if (val === false) {
+        this.maskFlag = false
+      }
+    },
     curValue (val) {
       this.$emit('input', val)
     }
   },
   methods: {
     handlerItem (obj) {
-      this.curValue = false
+      // this.curValue = false
+      this.maskFlag = true
       this.$emit('on-select', obj)
     }
   }

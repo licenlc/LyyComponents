@@ -6,6 +6,7 @@ import Picker from '@/demos/Picker'
 import upload from '@/demos/upload'
 import service from '@/demos/Service'
 import dialog from '@/demos/Dialog'
+import Form from '@/demos/Form'
 import Toast from '@/demos/Toast'
 import DatePicker from '@/demos/DatePicker'
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/input',
       name: 'input',
       component: Input
+    },
+    {
+      path: '/form',
+      name: 'form',
+      component: Form
     },
     {
       path: '/picker',

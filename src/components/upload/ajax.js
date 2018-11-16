@@ -27,11 +27,11 @@ export const ajax = (options = {}) => {
   }
   let xhr = new XMLHttpRequest()
   const action = options.action
-
-  if (xhr.onload) {
-    xhr.onload.onprogress = (e) => {
+  if (xhr.upload) {
+    xhr.upload.onprogress = (e) => {
       if (e.total > 0) {
         e.percent = e.loaded / e.total * 100
+        console.log(`${e.percent}%`)
       }
       options.onProgress(e)
     }
@@ -46,10 +46,12 @@ export const ajax = (options = {}) => {
   formData.append(options.filename, options.file)
 
   xhr.onerror = (e) => {
+    console.log('onerror')
     options.onError(e)
   }
 
   xhr.onload = () => {
+    console.log('onload')
     if (xhr.status < 200 || xhr.status > 300) {
       return options.onError(getError(action, options, xhr), getBody(xhr))
     }
@@ -67,5 +69,6 @@ export const ajax = (options = {}) => {
       xhr.setRequestHeader(key, headers[key])
     }
   }
+  console.log(xhr)
   xhr.send(formData)
 }

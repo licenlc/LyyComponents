@@ -1,6 +1,6 @@
 <template>
   <transition name="dv-mask">
-      <div class="picker" v-show="visible" @click="visible=false" @touchmove.prevent>
+      <div class="popup-mask" v-show="visible" @click="visible=false" @touchmove.prevent>
       </div>
   </transition>
 </template>

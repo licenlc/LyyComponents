@@ -1,13 +1,15 @@
 <template>
   <div class="dv-input-area">
-    <i class="dv-input-clear iconfont icon-qingchu" v-if="clearable && currentValue" @click="handlerClear"></i>
+    <i class="dv-input-clear iconfont icon-qingchu" v-show="clearable && currentValue" @click="handlerClear"></i>
     <div class="dv-input-center">
       <input
+      ref="input"
       :placeholder="placeholder"
       :disabled="disabled"
       :readonly="readonly"
       v-model="currentValue"
       @blur="handlerBlur"
+      @focus="handlerFocus"
       class="dv-input"/>
     </div>
   </div>
@@ -56,17 +58,14 @@ export default {
   },
   watch: {
     currentValue (newValue, oldValue) {
-      console.log('currentValue-newValue:', newValue)
+      console.log('currentValue-newValue:', this.maskValue(newValue))
+      this.currentValue = this.maskValue(newValue)
       this.$emit('input', this.maskValue(newValue))
-    },
-    value (val) {
-      this.currentValue = val
     }
   },
   methods: {
     maskValue (val = '') {
       const value = this.mask ? mask.toPattern(val, this.mask) : val
-      console.log('maskValue:', value)
       return value
     },
     clear () {
@@ -81,6 +80,10 @@ export default {
     handlerFocus () {
       console.log('handlerFocus')
       this.isFocus = true
+      // 滑动到屏幕里面
+      setTimeout(() => {
+        this.$refs.input.scrollIntoViewIfNeeded(false)
+      }, 500)
       this.$emit('on-focus', this.currentValue)
     },
     handerKeyUp () {

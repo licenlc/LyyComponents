@@ -1,6 +1,6 @@
 <template>
   <transition name="dv-mask">
-    <div class="lyy-customer"  v-transfer-dom v-show="curValue" @click="curValue=false" @touchmove.prevent>
+    <div class="lyy-customer popup-mask"  v-transfer-dom v-show="curValue" @click="curValue=false" @touchmove.prevent>
       <transition name="picker-content-fade">
         <section class="customer-wrapper" v-show="curValue" @click.stop>
           <div class="customer-title">

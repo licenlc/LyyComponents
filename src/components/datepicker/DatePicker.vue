@@ -23,7 +23,7 @@ function getArrText (min, max, formatString) {
 }
 
 export default {
-  name: 'date-picker',
+  name: 'dv-date-picker',
   components: {
     Picker
   },

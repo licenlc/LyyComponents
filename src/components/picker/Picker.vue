@@ -1,6 +1,6 @@
 <template>
   <transition name="dv-mask">
-    <div class="picker"  v-transfer-dom v-show="show" @click="show=false" @touchmove.prevent>
+    <div class="picker popup-mask"  v-transfer-dom v-show="show" @click="show=false" @touchmove.prevent>
       <transition name="picker-content-fade">
         <section class="picker-wrapper" v-show="show" @click.stop>
           <!-- 头部区 -->

@@ -39,10 +39,6 @@ export default {
       }
       classList.push(this.className)
       return classList.join(' ')
-    },
-    show () {
-      console.log('show')
-      // this.visible = false
     }
   },
   data () {

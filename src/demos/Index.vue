@@ -32,6 +32,7 @@ export default {
         {name: 'Upload文件上传(待完善)', path: 'upload'},
         {name: 'Picker(功能待完善，可以使用)', path: 'picker'},
         {name: 'DatePicker日期选择器', path: 'date'},
+        {name: 'Form表单', path: 'form'},
         {name: 'Input输入框', path: 'input'}
       ],
       custome: [

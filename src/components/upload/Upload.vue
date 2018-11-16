@@ -4,21 +4,24 @@
         <slot name="upload">
           <i class="upload-btn iconfont icon-add"/>
         </slot>
-        <input class="dv-upload-input" type="file" :multiple="multiple" ref="input" @change="onChange">
+        <input class="dv-upload-input" type="file" :accept="accept" :multiple="multiple" ref="input" @change="onChange">
     </div>
-    <upload-list v-for="(file, index) in fileList" :file="file" :key="index" @on-file-remove="handlerRemove"/>
+    <upload-list v-for="(item, index) in fileList" :file="item" :key="index">
+    </upload-list>
   </div>
 </template>
 
 <script>
 import UploadList from '@/components/upload/UploadList'
 import {ajax} from '@/components/upload/ajax'
+import mixin from './mixin'
 
 export default {
   name: 'dv-upload',
   components: {
     UploadList
   },
+  mixins: [mixin],
   props: {
     action: {
       type: String,
@@ -30,12 +33,9 @@ export default {
         return {}
       }
     },
-    multiple: {
-      type: Boolean,
-      default: true
-    },
     maxSize: {
-      type: Number
+      type: Number,
+      default: 1024 * 6
     }
   },
   data () {
@@ -49,24 +49,59 @@ export default {
     },
     onChange (e) {
       const files = e.target.files
-      console.log(files, Object.prototype.toString.call(files))
       if (!files) {
         return
       }
-      // this.addFiles(files)
+      this.addFiles(files)
       this.uploadFiles(files)
     },
     addFiles (files) {
       const length = files.length
-      // const newFiles = []
       for (let i = 0; i < length; i++) {
         if (files[i]) {
-          console.log('addFiles', files[i])
+          console.log('size:', files[i].size)
+          files[i].url = URL.createObjectURL(files[i])
           this.fileList.push(files[i])
         }
       }
     },
-    handlerProgress () {
+    uploadFiles (files) {
+      let filesList = Array.of(files)
+      // console.log(filesList)
+      if (!this.multiple) {
+        filesList = Array.of(filesList[0])
+      }
+      if (filesList.length === 0) {
+        return
+      }
+      console.log(filesList)
+      filesList.forEach(file => {
+        this.upload(file)
+      })
+    },
+    upload (file) {
+      console.log(file)
+      console.log(file.size)
+      console.log(this.maxSize * 1024)
+      if (file.size > this.maxSize * 1024) {
+        console.log('文件尺寸过大')
+        return false
+      }
+      this.post(file)
+    },
+    post (file) {
+      console.log('ajax')
+      ajax({
+        action: this.action,
+        headers: this.headers,
+        data: file,
+        onProgress: this.handlerProgress,
+        onSuccess: this.handlerSuccess,
+        onError: this.handlerError
+      })
+    },
+    handlerProgress (e) {
+      console.log(e.percent)
       this.$emit('on-progress')
     },
     handlerSuccess () {
@@ -81,39 +116,6 @@ export default {
       const fileList = this.fileList
       fileList.splice(fileList.indexOf(file), 1)
       this.$emit('on-remove', file, fileList)
-    },
-    uploadFiles (files) {
-      console.log('upload')
-      let filesList = Array.of(files)
-      if (!this.multiple) {
-        filesList = Array.of(filesList[0])
-      }
-      if (filesList.length === 0) {
-        return
-      }
-      filesList.forEach(file => {
-        this.upload(file)
-      })
-    },
-    upload (file) {
-      this.post(file)
-      console.log('Object:', Object.prototype.toString.call(file))
-    },
-    post (file) {
-      ajax({
-        action: this.action,
-        headers: this.headers,
-        data: file,
-        onProgress: () => {
-        },
-        onSuccess: () => {
-          this.handlerSuccess()
-        },
-        onError: () => {
-          this.handlerError()
-        }
-      })
-      console.log('post')
     }
   }
 }
