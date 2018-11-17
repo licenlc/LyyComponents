@@ -7,6 +7,7 @@
 
 <script>
 const prefixCls = 'dv-form'
+import {oneOf} from '@/components/utils/assist'
 
 export default {
   name: 'dv-form',
@@ -16,8 +17,10 @@ export default {
     },
     labelWidth: Number,
     labelPosition: {
-      type: String,
-      default: 'right'
+      default: 'right',
+      validator (value) {
+        return oneOf(value, ['left', 'right', 'center'])
+      }
     }
   },
   computed: {

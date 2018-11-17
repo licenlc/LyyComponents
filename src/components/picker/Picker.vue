@@ -119,7 +119,7 @@ export default {
       }
       let newSlelectIndex = this.selectIndex.join(',')
       if (oldSelectIndex !== newSlelectIndex) {
-        this.$toast('value-change')
+        // this.$toast('value-change')
         this.$emit(VALUE_CHANGE)
       }
       console.log(JSON.stringify(this.selectIndex), JSON.stringify(this.selectVal), JSON.stringify(this.selectText))
@@ -128,7 +128,7 @@ export default {
       if (this.pickerData.length === 1) {
         if (process.env.NODE_ENV === 'development') {
           console.log(process.env.NODE_ENV)
-          this.$toast({msg: `环境测试：${this.selectText[0]}`})
+          // this.$toast({msg: `环境测试：${this.selectText[0]}`})
         }
         console.log(this.selectText[0])
         this.$emit('input', this.selectText[0])
