@@ -8,6 +8,11 @@ import service from '@/demos/Service'
 import dialog from '@/demos/Dialog'
 import Form from '@/demos/Form'
 import Toast from '@/demos/Toast'
+import Error from '@/demos/Error'
+import Button from '@/demos/Button'
+import Scroll from '@/demos/Scroll'
+import Horizontal from '@/demos/scroll/HorizontalScroll'
+import Vertical from '@/demos/scroll/VerticalScroll'
 import DatePicker from '@/demos/DatePicker'
 
 Vue.use(Router)
@@ -18,6 +23,26 @@ export default new Router({
       path: '/',
       name: 'index',
       component: Index
+    },
+    {
+      path: '/scroll',
+      name: 'scroll',
+      component: Scroll
+    },
+    {
+      path: '/horizontal',
+      name: 'horizontal',
+      component: Horizontal
+    },
+    {
+      path: '/vertical',
+      name: 'vertical',
+      component: Vertical
+    },
+    {
+      path: '/button',
+      name: 'button',
+      component: Button
     },
     {
       path: '/input',
@@ -58,6 +83,11 @@ export default new Router({
       path: '/toast',
       name: 'toast',
       component: Toast
+    },
+    {
+      path: '/error',
+      name: 'errpr',
+      component: Error
     }
   ]
 })

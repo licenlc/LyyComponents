@@ -4,17 +4,28 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Toast from '@/components/toast/index'
-import Toast2 from '@/components/toast/Toast'
+// import Toast2 from '@/components/toast/Toast'
 import {alert, confirm} from '@/components/dialog'
-import CreateAPI from '@/create/index'
-Vue.use(CreateAPI, {
-  apiPrefix: '$$',
-  ComponentPrefix: 'lyy-'
-})
+// import CreateAPI from '@/create/index'
+// Vue.use(CreateAPI, {
+//   apiPrefix: '$$',
+//   ComponentPrefix: 'lyy-'
+// })
 
-Vue.createAPI(Toast2, true)
+// Vue.createAPI(Toast2, true)
+// Vue.config.silent = true
+// Vue.config.productionTip = true
+Vue.config.errorHandler = function (err, vm, info) {
+  console.log('errorHandler')
+  let {message, name, script, line, column, stack} = err
+  console.log('message:', name)
+  console.log('name:', message)
+  console.log('script:', script)
+  console.log('line:', line)
+  console.log('column:', column)
+  console.log('stack:', stack)
+}
 
-Vue.config.productionTip = false
 Vue.prototype.$toast = Toast
 Vue.prototype.$alert = alert
 Vue.prototype.$dialog = confirm

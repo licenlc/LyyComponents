@@ -16,7 +16,7 @@
 export default {
   methods: {
     defaultToast () {
-      this.$toast('默认toa水电费是范德萨的ddgdfgdfgdgd发生水电费水电费是st')
+      this.$toast('默认toa水电费是范德萨的ddgdfgdfgdgd发生水电费水电费是st', 'dkdk')
     },
     coutomToast () {
       this.$toast({

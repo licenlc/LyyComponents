@@ -11,24 +11,32 @@
 
 <script>
 import BScroll from 'better-scroll'
-import {getRect} from './uitls'
+import {getRect} from './utils'
 const SCOLL_EVENT = ['scroll', 'scroll-start', 'scroll-end']
 const [DIRECTION_H, DIRECTION_V] = ['horizontal', 'vertical']
 const DEFAULT_OPTIONS = {
   observeDOM: true,
   click: true,
   probeType: 1,
-  scrollbar: true,
+  scrollbar: false,
   pullDownRefresh: false,
-  pullUpLoad: false
+  pullUpLoad: false,
+  momentum: true
 }
 
 export default {
   name: 'scroll',
   props: {
+    options: {
+      type: Object,
+      default: () => {}
+    },
     diretction: {
       type: String,
-      default: DIRECTION_V
+      default: DIRECTION_V,
+      validator (value) {
+        return value === DIRECTION_H || value === DIRECTION_V
+      }
     }
   },
   mounted () {
@@ -36,7 +44,7 @@ export default {
       this.initScroll()
     })
   },
-  beforeDestroy() {
+  beforeDestroy () {
     this.destory()
   },
   methods: {
@@ -45,12 +53,20 @@ export default {
         console.error('没有获取包裹元素')
         return
       }
-      this._calcHeight()
-      let options = Object.assign({}, DEFAULT_OPTIONS, {
-        scrollY: this.diretction === DIRECTION_V,
-        scrollX: this.diretction === DIRECTION_H
+      this.$nextTick(() => {
+        this._calcHeight()
+        let options = Object.assign({}, DEFAULT_OPTIONS, {
+          scrollY: this.diretction === DIRECTION_V,
+          scrollX: this.diretction === DIRECTION_H
+        })
+        console.log(JSON.stringify(options))
+        this.scroll = new BScroll(this.$refs.wrapper, options)
+        this.scroll.on('scroll-end', () => {
+          console.log('滑动结束')
+          this.$emit('scroll-end', '')
+        })
+        this.scroll.enable()
       })
-      this.scroll = new BScroll(this.$refs.wrapper, options)
     },
     disable () {
       this.scroll && this.scroll.disable()
@@ -68,7 +84,8 @@ export default {
     },
     _calcHeight () {
       if (this.$refs.listWrapper) {
-        this.$refs.listWrapper.style.minHeight = this.pullDownRefresh || this.pullUpLoad ? `${getRect(this.$refs.listWrapper)}` : ''
+        console.log('_calcHeight')
+        this.$refs.listWrapper.style.minHeight = this.pullDownRefresh || this.pullUpLoad ? `${getRect(this.$refs.listWrapper)}` : '0'
       }
     },
     _onPullDownRefresh () {
@@ -83,3 +100,11 @@ export default {
 }
 </script>
 
+<style lang="less">
+.dv-scroll-wrapper{
+  position: relative;
+  // width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+</style>

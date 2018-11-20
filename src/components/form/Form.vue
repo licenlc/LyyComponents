@@ -6,9 +6,9 @@
 </template>
 
 <script>
-const prefixCls = 'dv-form'
 import {oneOf} from '@/components/utils/assist'
 
+const prefixCls = 'dv-form'
 export default {
   name: 'dv-form',
   props: {
