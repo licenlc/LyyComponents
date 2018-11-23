@@ -30,8 +30,7 @@ export const ajax = (options = {}) => {
   if (xhr.upload) {
     xhr.upload.onprogress = (e) => {
       if (e.total > 0) {
-        e.percent = e.loaded / e.total * 100
-        console.log(`${e.percent}%`)
+        e.percent = (e.loaded / e.total).toFixed(2) * 100
       }
       options.onProgress(e)
     }
@@ -46,12 +45,10 @@ export const ajax = (options = {}) => {
   formData.append(options.filename, options.file)
 
   xhr.onerror = (e) => {
-    console.log('onerror')
     options.onError(e)
   }
 
   xhr.onload = () => {
-    console.log('onload')
     if (xhr.status < 200 || xhr.status > 300) {
       return options.onError(getError(action, options, xhr), getBody(xhr))
     }
@@ -59,8 +56,8 @@ export const ajax = (options = {}) => {
   }
   xhr.open('post', action, true)
 
-  xhr.withCredentials = true
   if (options.withCredentials && 'withCredentials' in xhr) {
+    xhr.withCredentials = true
   }
 
   const headers = options.headers || {}
@@ -69,6 +66,5 @@ export const ajax = (options = {}) => {
       xhr.setRequestHeader(key, headers[key])
     }
   }
-  console.log(xhr)
   xhr.send(formData)
 }

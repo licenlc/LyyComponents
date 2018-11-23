@@ -13,18 +13,18 @@ import {alert, confirm} from '@/components/dialog'
 // })
 
 // Vue.createAPI(Toast2, true)
-// Vue.config.silent = true
+Vue.config.silent = true
 // Vue.config.productionTip = true
-Vue.config.errorHandler = function (err, vm, info) {
-  console.log('errorHandler')
-  let {message, name, script, line, column, stack} = err
-  console.log('message:', name)
-  console.log('name:', message)
-  console.log('script:', script)
-  console.log('line:', line)
-  console.log('column:', column)
-  console.log('stack:', stack)
-}
+// Vue.config.errorHandler = function (err, vm, info) {
+//   console.log('errorHandler')
+//   let {message, name, script, line, column, stack} = err
+//   console.log('message:', name)
+//   console.log('name:', message)
+//   console.log('script:', script)
+//   console.log('line:', line)
+//   console.log('column:', column)
+//   console.log('stack:', stack)
+// }
 
 Vue.prototype.$toast = Toast
 Vue.prototype.$alert = alert

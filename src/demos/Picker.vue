@@ -8,7 +8,7 @@
           <li @click="showPicker2" style="text-align:center;" class="demo-list">多列picker</li>
         </ul>
       <span style="color: red; font-size: 18px; text-align: center;">{{dateValue}}</span>
-      <picker title="单列picker" :data="data" ref="picker" :defaultIndex="[10]"/>
+      <picker title="单列picker" :data="data" :itemCount=7 ref="picker" :defaultIndex="[3]"/>
       <picker title="多列picker" :data="data2" ref="picker2" :defaultIndex="[3, 2]"/>
     </div>
 </template>
@@ -32,7 +32,7 @@ export default {
   },
   created () {
     let data = []
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 7; i++) {
       data.push({text: i + 100, value: i})
     }
     this.data = [data]

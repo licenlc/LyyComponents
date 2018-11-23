@@ -10,13 +10,13 @@
               <div class="picker-btn picker-ok" @click="onOk">{{okText}}</div>
           </div>
           <!-- 内容区 -->
-          <div class="picker-body">
+          <div class="picker-body" :style="contentHeight">
             <div class="picker-list-wrapper" ref="wheelWrapperRef">
               <div class="picker-list"  v-for="(item, index) in pickerData" :key="index">
                 <div class="wheel-scroll" >
                   <p v-for="(item2, index2) in item" :key="index2" class="wheel-item">{{item2.text}}</p>
                 </div>
-                <div class="picker-select"></div>
+                <div class="picker-select" ref="pickerSelect"></div>
              </div>
             </div>
           </div>
@@ -59,6 +59,10 @@ export default {
       type: Boolean,
       default: false
     },
+    itemCount: {
+      type: Number,
+      default: 5
+    },
     title: String
   },
   data () {
@@ -69,6 +73,20 @@ export default {
       selectVal: [],
       selectText: [],
       wheels: []
+    }
+  },
+  computed: {
+    contentHeight () {
+      let style = {}
+      let height = this.show && window.getComputedStyle(this.$refs.pickerSelect[0]).height
+      console.log(typeof height)
+      if (typeof height === 'string') {
+        style.Height = window.parseInt(height) * this.itemCount
+      } else {
+        style.Height = 250
+      }
+      console.log(style)
+      return style
     }
   },
   watch: {
@@ -82,7 +100,6 @@ export default {
       for (let i = 0; i < this.pickerData.length; i++) {
         this.selectIndex[i] = 0
       }
-      console.log('设置selectIndex:', JSON.stringify(this.selectIndex))
     }
   },
   methods: {

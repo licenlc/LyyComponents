@@ -6,7 +6,7 @@
         </slot>
         <input class="dv-upload-input" type="file" :accept="accept" :multiple="multiple" ref="input" @change="onChange">
     </div>
-    <upload-list v-for="(item, index) in fileList" :file="item" :key="index">
+    <upload-list v-for="(item, index) in fileList" :file="item" :key="index" @on-remove="handlerRemove">
     </upload-list>
   </div>
 </template>
@@ -59,7 +59,6 @@ export default {
       const length = files.length
       for (let i = 0; i < length; i++) {
         if (files[i]) {
-          console.log('size:', files[i].size)
           files[i].url = URL.createObjectURL(files[i])
           this.fileList.push(files[i])
         }
@@ -67,53 +66,58 @@ export default {
     },
     uploadFiles (files) {
       let filesList = Array.of(files)
-      // console.log(filesList)
       if (!this.multiple) {
         filesList = Array.of(filesList[0])
       }
       if (filesList.length === 0) {
         return
       }
-      console.log(filesList)
       filesList.forEach(file => {
         this.upload(file)
       })
     },
     upload (file) {
-      console.log(file)
-      console.log(file.size)
-      console.log(this.maxSize * 1024)
       if (file.size > this.maxSize * 1024) {
-        console.log('文件尺寸过大')
+        this.$toast('文件尺寸过大')
         return false
       }
       this.post(file)
     },
     post (file) {
-      console.log('ajax')
+      console.log('ajax', file)
       ajax({
         action: this.action,
         headers: this.headers,
         data: file,
-        onProgress: this.handlerProgress,
-        onSuccess: this.handlerSuccess,
-        onError: this.handlerError
+        onProgress: (e) => {
+          console.log('file:', file)
+          this.handlerProgress(e, file)
+        },
+        onSuccess: (res) => {
+          this.handlerSuccess(res, file)
+        },
+        onError: (res) => {
+          this.handlerError(res, file)
+        }
       })
     },
-    handlerProgress (e) {
-      console.log(e.percent)
-      this.$emit('on-progress')
+    handlerProgress (e, file) {
+      console.log(e.percent + '%')
+      console.log(file[0])
+      file[0][percent] = e.percent
+      this.$emit('on-progress', e, file, this.fileList)
     },
-    handlerSuccess () {
+    handlerSuccess (res, file) {
       this.$emit('on-success')
-      console.log('success')
+      console.log('success', res, file, this.fileList)
     },
-    handlerError () {
+    handlerError (res, file) {
       console.log('on-error')
-      this.$emit('on-error')
+      this.$emit('on-error', res, file, this.fileList)
     },
     handlerRemove (file) {
       const fileList = this.fileList
+      console.log(file)
       fileList.splice(fileList.indexOf(file), 1)
       this.$emit('on-remove', file, fileList)
     }

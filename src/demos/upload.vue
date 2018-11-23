@@ -1,6 +1,6 @@
 <template>
   <div class="upload-pages" style="padding: 20px;background-color:#f0f0f0;">
-    <upload :action="action" :multiple="true"/>
+    <upload :action="action" />
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
   },
   data () {
     return {
-      action: 'http://jsonplaceholder.typicode.com/photos/'
+      action: 'http://192.168.21.48:8083/upload/file'
     }
   },
   methods: {

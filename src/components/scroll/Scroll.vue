@@ -4,6 +4,8 @@
       <div class="list-wrapper" ref="listWrapper">
         <slot>
         </slot>
+        <slot name="pullup">
+        </slot>
       </div>
     </div>
   </div>
@@ -106,5 +108,12 @@ export default {
   // width: 100%;
   height: 100%;
   overflow: hidden;
+  // white-space: nowrap;
+  .scroll-content{
+    display: inline-block;
+  }
+  .list-wrapper{
+    overflow: hidden;
+  }
 }
 </style>

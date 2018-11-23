@@ -1,5 +1,5 @@
 <template>
- <div >
+ <div style="background-color: #edf0f4;height:600px;">
       <div class="demo-title">
         scroll组件
       </div>
@@ -21,11 +21,11 @@ export default {
   },
   data () {
     return {
-      list: ['1', '2', '3', '4', '5']
+      list: []
     }
   },
   created () {
-    for (let i = 5; i < 24; i++) {
+    for (let i = 0; i < 5; i++) {
       this.list.push(i)
     }
   }
@@ -35,22 +35,23 @@ export default {
 <style lang="less">
 
 .div-hori{
+  margin-top: 20px;
   width: 100%;
   padding: 10px;
-  height: 120px;
+  height: 160px;
   overflow: hidden;
-  background: #c9d7d7;
+  background: #fff;
   box-sizing: border-box;
 }
 
 .scorll-item{
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 160px;
   background: #c5bbbb;
-  margin-left: 10px;
+  margin-right: 20px;
   margin-bottom: 10px;
   display: inline-block;
   text-align: center;
-  line-height: 100px;
+  line-height: 160px;
 }
 </style>
