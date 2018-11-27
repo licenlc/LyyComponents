@@ -5,6 +5,14 @@
         <slot>
         </slot>
         <slot name="pullup">
+          <div class="scroll-pullup-wrapper" v-if="pullUpLoad">
+            <div class="pullup-end" v-if="!isPullUpLoad">
+              <span>加载结束</span>
+            </div>
+            <div class="pullup-loading" v-else>
+              加载中....
+            </div>
+          </div>
         </slot>
       </div>
     </div>
@@ -14,7 +22,7 @@
 <script>
 import BScroll from 'better-scroll'
 import {getRect} from './utils'
-const SCOLL_EVENT = ['scroll', 'scroll-start', 'scroll-end']
+// const SCOLL_EVENT = ['scroll', 'scroll-start', 'scroll-end']
 const [DIRECTION_H, DIRECTION_V] = ['horizontal', 'vertical']
 const DEFAULT_OPTIONS = {
   observeDOM: true,
@@ -41,6 +49,22 @@ export default {
       }
     }
   },
+  watch: {
+    options (val) {
+      console.log(JSON.stringify(val))
+    }
+  },
+  data () {
+    return {
+      isPullUpLoad: false
+    }
+  },
+  computed: {
+    pullUpLoad () {
+      console.log('computed:', this.options.pullUpLoad)
+      return this.options.pullUpLoad
+    }
+  },
   mounted () {
     this.$nextTick(() => {
       this.initScroll()
@@ -63,12 +87,17 @@ export default {
         })
         console.log(JSON.stringify(options))
         this.scroll = new BScroll(this.$refs.wrapper, options)
-        this.scroll.on('scroll-end', () => {
+        this.scroll.on('scrollEnd', () => {
           console.log('滑动结束')
-          this.$emit('scroll-end', '')
+          this.$emit('scroll-end')
         })
         this.scroll.enable()
+        if (options.pullUpLoad) {
+          this._onPullupLoad()
+        }
       })
+    },
+    _handleEvent () {
     },
     disable () {
       this.scroll && this.scroll.disable()
@@ -97,6 +126,17 @@ export default {
     _offPullDownRefresh () {
       this.scroll.off('pullingDown', this._pullDownHandle)
       this.scroll.off('scroll', this._pullDownScrollHandle)
+    },
+    _onPullupLoad () {
+      console.log('pulling-up')
+      this.scroll.on('pullingUp', this._hanldlePullupLoad)
+    },
+    _offPullupLoad () {
+      this.scroll.off('pullingup', this._hanldlePullupLoad)
+    },
+    _hanldlePullupLoad () {
+      this.isPullUpLoad = true
+      this.$emit('pullingup')
     }
   }
 }
@@ -114,6 +154,10 @@ export default {
   }
   .list-wrapper{
     overflow: hidden;
+  }
+  .scroll-pullup-wrapper{
+    font-size: 16px;
+    padding: 10px;
   }
 }
 </style>

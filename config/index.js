@@ -12,7 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/upload': {
-        target: 'http://localhost:4545',
+        // target: 'http://localhost:4545',
+        target: 'http://localhost:7001',
         changeOrigin: true, //开启代理
       }
     },

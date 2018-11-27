@@ -4,7 +4,7 @@
         scroll组件
       </div>
       <div class="div-hori2">
-        <scroll diretction="vertical">
+        <scroll diretction="vertical" :options="options">
             <div class="scorll-item2" v-for="(item, index) in list" :key="index">
               {{index}}
             </div>
@@ -21,7 +21,10 @@ export default {
   },
   data () {
     return {
-      list: []
+      list: [],
+      options: {
+        pullUpLoad: true
+      }
     }
   },
   created () {

@@ -12,7 +12,7 @@ export default {
   },
   data () {
     return {
-      action: 'http://192.168.21.48:8083/upload/file'
+      action: 'http://192.168.21.48:8083/upload'
     }
   },
   methods: {
